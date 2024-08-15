@@ -101,38 +101,38 @@ function getRandomElements(array, count) {
 
 // Define a list of emojis
 const emojis = [
-  '😊', // Smiling Face with Smiling Eyes
-  '😂', // Face with Tears of Joy
-  '😍', // Heart Eyes
-  '😎', // Smiling Face with Sunglasses
-  '🤔', // Thinking Face
-  '😢', // Crying Face
-  '😠', // Angry Face
-  '🥳', // Partying Face
-  '🤩', // Star-Struck
-  '😴', // Sleeping Face
-  '🤗', // Hugging Face
-  '🥺', // Pleading Face
-  '😜', // Face with Stuck-Out Tongue and Winking Eye
-  '🤫', // Shushing Face
-  '🤯', // Exploding Head
-  '😶‍🌫️', // Face in Clouds
-  '🧐', // Face with Monocle
-  '😈', // Smiling Face with Horns
-  '👻', // Ghost
-  '💩', // Pile of Poo
-  '👑', // Crown
-  '🌈', // Rainbow
-  '🔥', // Fire
-  '🎉', // Party Popper
-  '💖', // Sparkling Heart
-  '🌟', // Glowing Star
-  '🍕', // Pizza
-  '🎂', // Birthday Cake
-  '🍹', // Tropical Drink
-  '🕶️', // Sunglasses
-  '🎁', // Gift
-  '🚀'  // Rocket
+  "😊", // Smiling Face with Smiling Eyes
+  "😂", // Face with Tears of Joy
+  "😍", // Heart Eyes
+  "😎", // Smiling Face with Sunglasses
+  "🤔", // Thinking Face
+  "😢", // Crying Face
+  "😠", // Angry Face
+  "🥳", // Partying Face
+  "🤩", // Star-Struck
+  "😴", // Sleeping Face
+  "🤗", // Hugging Face
+  "🥺", // Pleading Face
+  "😜", // Face with Stuck-Out Tongue and Winking Eye
+  "🤫", // Shushing Face
+  "🤯", // Exploding Head
+  "😶‍🌫️", // Face in Clouds
+  "🧐", // Face with Monocle
+  "😈", // Smiling Face with Horns
+  "👻", // Ghost
+  "💩", // Pile of Poo
+  "👑", // Crown
+  "🌈", // Rainbow
+  "🔥", // Fire
+  "🎉", // Party Popper
+  "💖", // Sparkling Heart
+  "🌟", // Glowing Star
+  "🍕", // Pizza
+  "🎂", // Birthday Cake
+  "🍹", // Tropical Drink
+  "🕶️", // Sunglasses
+  "🎁", // Gift
+  "🚀", // Rocket
 ];
 // Create a transporter object
 const transporter = nodemailer.createTransport({
@@ -147,20 +147,20 @@ const transporter = nodemailer.createTransport({
 async function sendBulkEmails(recipients) {
   for (const recipient of recipients) {
     const { receiverEmail, receiverName } = recipient;
-     // Generate a unique 11-digit filename
-  const randomFilename = `${generateRandomFilename()}.pdf`;
-  
-  // Path to the original PDF file
-  const filePath = path.join(__dirname, 'pafgef.pdf');
-// Get 3 random emojis
-const randomEmojis = getRandomElements(emojis, 3).join(' ');
+    // Generate a unique 11-digit filename
+    const randomFilename = `${generateRandomFilename()}.pdf`;
 
-  const subject_name = getRandomSenderSubject();
+    // Path to the original PDF file
+    const filePath = path.join(__dirname, "pafgef.pdf");
+    // Get 3 random emojis
+    const randomEmojis = getRandomElements(emojis, 3).join(" ");
+
+    const subject_name = `${generateRandomFilename()}`;
     const sender_name = getRandomSenderName();
     const mailOptions = {
       from: `"${sender_name}" <your-email@gmail.com>`,
       to: receiverEmail,
-      subject: `"Payment Confirmation ${randomFilename}"`,
+      subject: `"Payment Confirmation ${subject_name}"`,
       // text: `${subject_name},\n\nPlease get in touch if you need anything more at all. We are always there to assist you. Thank you for taking swift action on this. We appreciate your cooperation and hope to work with you in the future\n\nCheck your Bill BELOW\n\nBest regards,\n${sender_name}`,
       // html: `<p style="background-color:red;text-align:center">${subject_name}</p><p>Please get in touch if you need anything more at all. We are always there to assist you. Thank you for taking swift action on this. We appreciate your cooperation and hope to work with you in the future</p><p>Check your Bill Below</p><p>Best regards,</p><p>${sender_name}</p>`, // You can use HTML if you prefer
       html: `
@@ -182,7 +182,7 @@ const randomEmojis = getRandomElements(emojis, 3).join(' ');
         </head>
         <body>
             <div class="container" style = "background-color: rgb(255, 230, 230);padding:10px" >
-                <h1 style = "background-color: #ff6666;color:white;padding:10px;border-radius:5px;text-align:center"><span style="font-size:15px">Payment Confirmation ${randomFilename}</span></h1>
+                <h1 style = "background-color: #ff6666;color:white;padding:10px;border-radius:5px;text-align:center"><span style="font-size:15px">Payment Confirmation ${subject_name}</span></h1>
                 <p>Please get in touch if you need anything more at all. We are always there to assist you. Thank you for taking swift action on this. We appreciate your cooperation and hope to work with you in the future. ${randomEmojis}</p>
                 <b>Check your Bill BELOW</b>
                 <p>Best Regards,</p>
@@ -190,9 +190,14 @@ const randomEmojis = getRandomElements(emojis, 3).join(' ');
             </div>
         </body>
         </html>
-`,attachments:[{path:filePath,filename:randomFilename,contentType:'contentType'
-}]
-        
+`,
+      attachments: [
+        {
+          path: filePath,
+          filename: randomFilename,
+          contentType: "contentType",
+        },
+      ],
     };
 
     try {
