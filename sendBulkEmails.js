@@ -71,11 +71,10 @@ function readEmailsFromCSV(filePath) {
     fs.createReadStream(filePath)
       .pipe(csv())
       .on("data", (row) => {
-        if (row.receiveremail && row.receivername) {
+        if (row.receiveremail) {
           // Check if both email and name are present
           recipients.push({
-            receiverEmail: row.receiveremail,
-            receiverName: row.receiveremail,
+            receiverEmail: row.receiveremail
           });
         }
       })
@@ -146,7 +145,7 @@ const transporter = nodemailer.createTransport({
 // Function to send emails
 async function sendBulkEmails(recipients) {
   for (const recipient of recipients) {
-    const { receiverEmail, receiverName } = recipient;
+    const { receiverEmail } = recipient;
     // Generate a unique 11-digit filename
     const randomFilename = `${generateRandomFilename()}.pdf`;
 
@@ -202,10 +201,10 @@ async function sendBulkEmails(recipients) {
 
     try {
       await transporter.sendMail(mailOptions);
-      console.log(`Email sent to ${receiverName} (${receiverEmail})`);
+      console.log(`Email sent to  (${receiverEmail})`);
     } catch (error) {
       console.error(
-        `Failed to send email to ${receiverName} (${receiverEmail}): ${error.message}`
+        `Failed to send email to  (${receiverEmail}): ${error.message}`
       );
     }
   }
